@@ -1,7 +1,21 @@
+import { FC, useContext, useMemo } from "react";
 import { List, Paper } from "@mui/material";
+import { EntryStatus } from "../../interfaces";
 import { EntryCard } from "./";
+import { EntriesContext } from "../entries";
 
-export const EntryList = () => {
+interface Props {
+  status: EntryStatus;
+}
+
+export const EntryList: FC<Props> = ({ status }) => {
+  const { entries } = useContext(EntriesContext);
+
+  const entriesStatus = useMemo(
+    () => entries.filter((entry) => entry.status === status),
+    [entries, status]
+  );
+
   return (
     <div>
       <Paper
@@ -13,10 +27,9 @@ export const EntryList = () => {
         }}
       >
         <List sx={{ opacity: 1 }}>
-          <EntryCard />
-          <EntryCard />
-          <EntryCard />
-          <EntryCard />
+          {entriesStatus.map((entry) => (
+            <EntryCard key={entry._id} entry={entry} />
+          ))}
         </List>
       </Paper>
     </div>
