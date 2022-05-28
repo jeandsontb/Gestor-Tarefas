@@ -5,11 +5,12 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 import { EntriesContext } from "../entries/EntriesContext";
+import { UIContext } from "./UIContext";
 
 export const NewEntry = () => {
   const { addNewEntry } = useContext(EntriesContext);
+  const { isAddingEntry, setIsAddingEntry } = useContext(UIContext);
 
-  const [isAdding, setIsAdding] = useState(false);
   const [inputTask, setInputTask] = useState("");
   const [touched, setTouched] = useState(false);
 
@@ -23,12 +24,12 @@ export const NewEntry = () => {
     addNewEntry(inputTask);
     setInputTask("");
     setTouched(false);
-    setIsAdding(false);
+    setIsAddingEntry(false);
   };
 
   return (
     <Box sx={{ marginBottom: 2, paddingX: 2 }}>
-      {isAdding ? (
+      {isAddingEntry ? (
         <>
           <TextField
             fullWidth
@@ -50,7 +51,7 @@ export const NewEntry = () => {
             <Button
               variant="text"
               onClick={() => [
-                setIsAdding(false),
+                setIsAddingEntry(false),
                 setTouched(false),
                 setInputTask(""),
               ]}
@@ -74,7 +75,7 @@ export const NewEntry = () => {
           fullWidth
           variant="outlined"
           sx={{ marginTop: 2 }}
-          onClick={() => setIsAdding(true)}
+          onClick={() => setIsAddingEntry(true)}
         >
           Adicionar tarefa
         </Button>
