@@ -9,26 +9,7 @@ export interface EntriesState {
 }
 
 const UI_INITIAL_STATE: EntriesState = {
-  entries: [
-    {
-      _id: uuidV4(),
-      description: "Pendente: Task for includes funcionalits in application",
-      status: "pending",
-      createdAt: Date.now(),
-    },
-    {
-      _id: uuidV4(),
-      description: "In-Progress Task for tables  in application",
-      status: "in-progress",
-      createdAt: Date.now() - 1000000,
-    },
-    {
-      _id: uuidV4(),
-      description: "Terminadas: Task for create modals in application",
-      status: "finish",
-      createdAt: Date.now() - 10000,
-    },
-  ],
+  entries: [],
 };
 
 interface Props {
