@@ -27,7 +27,6 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse) => {
   const toUpdate = await Entry.findById(id);
 
   if (!toUpdate) {
-    await db.disconnect();
     return res
       .status(400)
       .json({ message: "Não foi possível localizar essa tarefa " + id });
@@ -36,11 +35,21 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse) => {
   const { description = toUpdate.description, status = toUpdate.status } =
     req.body;
 
-  const updateEntry = await Entry.findByIdAndUpdate(
-    id,
-    { description, status },
-    { runValidators: true, new: true }
-  );
-
-  res.status(200).json(updateEntry!);
+  try {
+    //PODE SER FEITO DESSA FORMA A PASSAGEM DO DADO ATUALIZADO
+    // toUpdate.description = description
+    // toUpdate.status = status
+    // await toUpdate.save()
+    // E DA FORMA ABAIXO MAIS DINÂMICA MAS UM POUCO MAIS PESADA
+    const updateEntry = await Entry.findByIdAndUpdate(
+      id,
+      { description, status },
+      { runValidators: true, new: true }
+    );
+    await db.disconnect();
+    res.status(200).json(updateEntry!);
+  } catch (err: any) {
+    await db.disconnect();
+    res.status(400).json({ message: err.errors.status.message });
+  }
 };
