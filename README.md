@@ -81,6 +81,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [NEXT][next]
 - [MATERIAL-UI][ui]
 - [React][react]
+- [DOCKER][docker]
 - [Vscode][vscode]
 
 ## 📝 Licença
@@ -93,3 +94,4 @@ Feito por Jeandson Tenorio 👋🏽 [Linkedin.](https://www.linkedin.com/in/jean
 [ui]: https://mui.com/pt/
 [react]: https://pt-br.reactjs.org/
 [vscode]: https://code.visualstudio.com/
+[docker]: https://www.docker.com/
