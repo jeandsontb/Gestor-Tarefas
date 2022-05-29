@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SnackbarProvider maxSnack={3}>
       <EntriesProvider>
         <UIProvider>
-          <ThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={lightTheme}>
             <CssBaseline />
             <Component {...pageProps} />
           </ThemeProvider>
