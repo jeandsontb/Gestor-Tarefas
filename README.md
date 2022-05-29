@@ -13,9 +13,9 @@ OPENJIRA - É um projeto para gerenciar tarefas e manipular as atividades que es
 ### Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="Task" title="#Task" src="" width="400px">
+  <img alt="Task" title="#Task" src="https://raw.githubusercontent.com/jeandsontb/Gestor-Tarefas/main/public/screen/openjira.png?token=GHSAT0AAAAAABUBKJMGTH7OPJSHTYDJOA6MYUTZVIQ" width="400px">
 
-  <img alt="Task" title="#Task" src="" width="400px">
+  <img alt="Task" title="#Task" src="https://raw.githubusercontent.com/jeandsontb/Gestor-Tarefas/main/public/screen/openjira1.png?token=GHSAT0AAAAAABUBKJMHHIA4Y7YIF62JPYWEYUTZVXQ" width="400px">
 </p>
 
 ## 💡 Como executar o projeto
