@@ -1,16 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import mongoose from "mongoose";
-import { db } from "../../../database";
-import { Entry, IEntry } from "../../../models";
+import { db } from "../../../../database";
+import { Entry, IEntry } from "../../../../models";
 
 type Data = { message: string } | IEntry;
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
+  //O MIDDWARE JÁ VAI FAZER ESSA PARTE DE VERIFICAÇÃO
+  // const { id } = req.query;
 
-  if (!mongoose.isValidObjectId(id)) {
-    return res.status(400).json({ message: "ID informado não é válido" + id });
-  }
+  // if (!mongoose.isValidObjectId(id)) {
+  //   return res.status(400).json({ message: "ID informado não é válido" + id });
+  // }
 
   switch (req.method) {
     case "PUT":
@@ -28,8 +28,6 @@ const getEntry = async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
   const toGetEntry = await Entry.findById(id);
   await db.disconnect();
-
-  console.log(toGetEntry);
 
   if (!toGetEntry) {
     return res
