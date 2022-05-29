@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useMemo, useState } from "react";
+import { ChangeEvent, FC, useMemo, useState, useContext } from "react";
 import { GetServerSideProps } from "next";
 import {
   capitalize,
@@ -22,6 +22,7 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { Layout } from "../../components/layout";
 import { Entry, EntryStatus } from "../../interfaces";
 import { dbEntries } from "../../database";
+import { EntriesContext } from "../../context/entries";
 
 interface Props {
   entry: Entry;
@@ -33,6 +34,8 @@ const EntryPage: FC<Props> = ({ entry }) => {
   const [taskValue, setTaskValue] = useState(entry.description);
   const [status, setStatus] = useState<EntryStatus>(entry.status);
   const [touched, setTouched] = useState(false);
+
+  const { updateEntry } = useContext(EntriesContext);
 
   const verifyForm = useMemo(
     () => taskValue.length <= 0 && touched,
@@ -47,7 +50,17 @@ const EntryPage: FC<Props> = ({ entry }) => {
     setStatus(event.target.value as EntryStatus);
   };
 
-  const handleSaveTask = () => {};
+  const handleSaveTask = () => {
+    if (taskValue.trim().length === 0) return;
+
+    const updatedEntry: Entry = {
+      ...entry,
+      status,
+      description: taskValue,
+    };
+
+    updateEntry(updatedEntry, true);
+  };
 
   return (
     <Layout title={taskValue.substring(0, 20) + " ..."}>
