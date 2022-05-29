@@ -15,10 +15,30 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case "PUT":
       return updateEntry(req, res);
+    case "GET":
+      return getEntry(req, res);
     default:
       return res.status(400).json({ message: "Método não existe" });
   }
 }
+
+const getEntry = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id } = req.query;
+
+  await db.connect();
+  const toGetEntry = await Entry.findById(id);
+  await db.disconnect();
+
+  console.log(toGetEntry);
+
+  if (!toGetEntry) {
+    return res
+      .status(400)
+      .json({ message: "Não foi possível localizar essa tarefa " + id });
+  }
+
+  return res.status(200).json(toGetEntry);
+};
 
 const updateEntry = async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.query;
