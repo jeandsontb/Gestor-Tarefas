@@ -23,6 +23,7 @@ import { Layout } from "../../components/layout";
 import { Entry, EntryStatus } from "../../interfaces";
 import { dbEntries } from "../../database";
 import { EntriesContext } from "../../context/entries";
+import { dateFunctions } from "../../utils";
 
 interface Props {
   entry: Entry;
@@ -70,7 +71,9 @@ const EntryPage: FC<Props> = ({ entry }) => {
             <Card>
               <CardHeader
                 title={`Entrada:`}
-                subheader={`Criada em: ${entry.createdAt} minutos`}
+                subheader={`Criada em: ${dateFunctions.getFormatDistanceToNow(
+                  entry.createdAt
+                )}`}
               />
 
               <CardContent>
